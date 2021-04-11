@@ -7,13 +7,21 @@
 <table class="table table-dark table-striped table-bordered table-hover">
     <tr>
         <thead class="thead-light">
-        <th>Détail</th>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Date naissance</th>
+        <th>Nationalité</th>
+        <th>Spécialité</th>
         </thead>
     </tr>
 
         <article>
             <tr>
                 <td> {{ agent.name }} </td>
+                <td> {{ agent.firstname }} </td>
+                <td> {{ agent.birthday | date('d/m/Y') }} </td>
+                <td> {{ agent.nationality }} </td>
+                <td> {{ agent.speciality.name }} </td>
           </tr>
         </article>
 

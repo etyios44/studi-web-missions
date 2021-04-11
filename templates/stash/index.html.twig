@@ -1,15 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello {{controller_name}}{% endblock %}
+{% block title %}Gestion des planques{% endblock %}
 
 {% block body %}
 
 <section>
-    <p></p><p>Ci-joint la liste des planques proposées. </p>
+    <p></p><h1>Liste des planques</h1>
+    <p>Vous pouvez visualiser le détail de chaque planque par le bouton "Détail".</p>
+    {% if app.user %}
     <p></p><p>Avec un compte d'administration, vous pouvez :</p>
     <p>- créer une nouvelle planque : <a href="{{ path('stash_create') }}" class="btn btn-success">Créer</a></p>
     <p>- modifier le contenu d'une planque par le bouton "Modifier" </p>
     <p>- supprimer une planque par le bouton "Supprimer".</p>
+    {% endif %}
     <table class="table table-dark table-striped table-bordered table-hover">
         <tr>
             <thead class="thead-light">
@@ -21,8 +24,10 @@
                 <tr>
                     <td> {{ n_stash.code  }} </td>
                     <td><a href="{{ path('stash_show',{'id': n_stash.id}) }}" class="btn btn-success">Détail</a></td>
+                    {% if app.user %}
                     <td><a href="{{ path('stash_edit',{'id': n_stash.id}) }}" class="btn btn-warning">Modifier</a></td>
                     <td><a href="{{ path('stash_del',{'id': n_stash.id}) }}" class="btn btn-danger" onclick="return confirm('Confirmez la suppression ?')">Supprimer</a></td>
+                    {% endif %}
                 </tr>
             </article>
         {% endfor %}

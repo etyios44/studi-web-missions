@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello {{controller_name}}{% endblock %}
+{% block title %}Gestion des missions{% endblock %}
 
 {% block body %}
 
 <section>
-    <p></p><p>Ci-joint la liste des missions proposées. </p>
+    <p></p><h1>Liste des missions proposées</h1>
     <p>Vous pouvez visualiser le détail de chaque mission par le bouton "Détail".</p>
     {% if app.user %}
     <p></p><p>Avec un compte d'administration, vous pouvez :</p>
@@ -17,19 +17,14 @@
         <tr>
             <thead class="thead-light">
             <th>Titre</th>
-            <th>Pays</th>
             <th>Début</th>
-            <th>Fin</th>
-            <th>Status</th>
             </thead>
         </tr>
         {% for mission in missions %}
             <article>
                 <tr>
                     <td> {{ mission.TitleMission  }} </td>
-                    <td> {{ mission.CountryMission  }} </td>
                     <td> {{ mission.DateStartMission | date('d/m/Y H:i') }} </td>
-                    <td> {{ mission.DateEndMission | date('d/m/Y H:i') }} </td>
                     <td><a href="{{ path('missions_show',{'id': mission.id}) }}" class="btn btn-success">Détail</a></td>
                     {% if app.user %}
                     <td><a href="{{ path('missions_edit',{'id': mission.id}) }}" class="btn btn-warning">Modifier</a></td>
