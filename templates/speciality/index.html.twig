@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello {{controller_name}}{% endblock %}
+
+{% block body %}
+
+<section>
+    <p></p><p>Ci-joint la liste des spécialités proposées. </p>
+    <p></p><p>Avec un compte d'administration, vous pouvez :</p>
+    <p>- créer une nouvelle spécialité : <a href="{{ path('speciality_create') }}" class="btn btn-success">Créer</a></p>
+    <p>- modifier le contenu d'une spécialité par le bouton "Modifier" </p>
+    <p>- supprimer une spécialité par le bouton "Supprimer".</p>
+    <table class="table table-dark table-striped table-bordered table-hover">
+        <tr>
+            <thead class="thead-light">
+            <th>Détail</th>
+            </thead>
+        </tr>
+        {% for n_speciality in speciality %}
+            <article>
+                <tr>
+                    <td> {{ n_speciality.name  }} </td>
+                    <td><a href="{{ path('speciality_show',{'id': n_speciality.id}) }}" class="btn btn-success">Détail</a></td>
+                    <td><a href="{{ path('speciality_edit',{'id': n_speciality.id}) }}" class="btn btn-warning">Modifier</a></td>
+                    <td><a href="{{ path('speciality_del',{'id': n_speciality.id}) }}" class="btn btn-danger" onclick="return confirm('Confirmez la suppression ?')">Supprimer</a></td>
+                </tr>
+            </article>
+        {% endfor %}
+    </table>
+</section>
+{{ knp_pagination_render(speciality) }}
+{% endblock %}

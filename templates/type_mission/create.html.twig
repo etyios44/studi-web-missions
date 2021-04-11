@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme formTypeMission 'bootstrap_4_layout.html.twig' %}
+
+{% block body %}
+
+    <h1>Création d'un type de mission </h1>
+
+    {{ form_start(formTypeMission) }}
+
+    {{ form_row(formTypeMission.title)}}
+
+    {{ form_end(formTypeMission) }}
+    
+    <button type="submit" class="btn btn-success">
+        {% if editMode %}
+            Enregistrer les modifications
+        {% else %}
+            Ajouter le type de mission
+        {% endif %}
+        </button>
+
+
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello {{controller_name}}{% endblock %}
+
+{% block body %}
+
+<table class="table table-dark table-striped table-bordered table-hover">
+    <tr>
+        <thead class="thead-light">
+        <th>Titre</th>
+        <th>Description</th>
+        <th>Nom Code</th>
+        <th>Pays</th>
+        <th>Début</th>
+        <th>Fin</th>
+        </thead>
+    </tr>
+
+        <article>
+            <tr>
+                <td> {{ missions.TitleMission  }} </td>
+                <td> {{ missions.DescriptionMission  }} </td>
+                <td> {{ missions.NameCode  }} </td>
+                <td> {{ missions.CountryMission  }} </td>
+                <td> {{ missions.DateStartMission | date('d/m/Y H:i') }} </td>
+                <td> {{ missions.DateEndMission | date('d/m/Y H:i') }} </td>
+          </tr>
+        </article>
+
+</table>
+
+<a href="{{ path('missions') }}" class="btn btn-success">Retour</a>
+{% endblock %}

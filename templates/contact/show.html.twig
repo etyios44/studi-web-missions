@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello {{controller_name}}{% endblock %}
+
+{% block body %}
+
+<table class="table table-dark table-striped table-bordered table-hover">
+    <tr>
+        <thead class="thead-light">
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Nom Code</th>
+        <th>Date naissance</th>
+        <th>Nationalité</th>
+        </thead>
+    </tr>
+
+        <article>
+            <tr>
+                <td> {{ contact.name  }} </td>
+                <td> {{ contact.firstname  }} </td>
+                <td> {{ contact.namecode  }} </td>
+                <td> {{ contact.birthday | date('d/m/Y')  }} </td>
+                <td> {{ contact.nationality  }} </td>
+          </tr>
+        </article>
+
+</table>
+
+<a href="{{ path('contact') }}" class="btn btn-success">Retour</a>
+{% endblock %}

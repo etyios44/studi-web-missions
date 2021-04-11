@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme formMissions 'bootstrap_4_layout.html.twig' %}
+
+{% block body %}
+
+    <h1>Création d'une mission </h1>
+
+    {{ form_start(formMissions) }}
+
+    {{ form_row(formMissions.TitleMission)}}
+    {{ form_row(formMissions.DescriptionMission) }}
+    {{ form_row(formMissions.NameCode) }}
+    {{ form_row(formMissions.CountryMission) }}
+    {{ form_row(formMissions.DateStartMission) }}
+    {{ form_row(formMissions.DateEndMission) }}
+
+    <button type="submit" class="btn btn-success">
+        {% if editMode %}
+            Enregistrer les modifications
+        {% else %}
+            Ajouter la mission
+        {% endif %}
+        </button>
+
+    {{ form_end(formMissions) }}
+
+{% endblock %}

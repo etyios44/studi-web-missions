@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello {{controller_name}}{% endblock %}
+
+{% block body %}
+
+<section>
+    <p></p><p>Ci-joint la liste des cîbles proposées. </p>
+    <p></p><p>Avec un compte d'administration, vous pouvez :</p>
+    <p>- créer une nouvelle cîble : <a href="{{ path('target_create') }}" class="btn btn-success">Créer</a></p>
+    <p>- modifier le contenu d'une cîble par le bouton "Modifier" </p>
+    <p>- supprimer une cîble par le bouton "Supprimer".</p>
+    <table class="table table-dark table-striped table-bordered table-hover">
+        <tr>
+            <thead class="thead-light">
+            <th>Nom de code</th>
+            </thead>
+        </tr>
+        {% for n_target in target %}
+            <article>
+                <tr>
+                    <td> {{ n_target.namecode  }} </td>
+                    <td><a href="{{ path('target_show',{'id': n_target.id}) }}" class="btn btn-success">Détail</a></td>
+                    <td><a href="{{ path('target_edit',{'id': n_target.id}) }}" class="btn btn-warning">Modifier</a></td>
+                    <td><a href="{{ path('target_del',{'id': n_target.id}) }}" class="btn btn-danger" onclick="return confirm('Confirmez la suppression ?')">Supprimer</a></td>
+                </tr>
+            </article>
+        {% endfor %}
+    </table>
+</section>
+{{ knp_pagination_render(target) }}
+{% endblock %}

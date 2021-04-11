@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello {{controller_name}}{% endblock %}
+
+{% block body %}
+
+<section>
+    <p></p><p>Ci-joint la liste des agents. </p>
+    <p></p><p>Avec un compte d'administration, vous pouvez :</p>
+    <p>- créer un nouvel agent : <a href="{{ path('agent_create') }}" class="btn btn-success">Créer</a></p>
+    <p>- modifier les info d'un agent par le bouton "Modifier" </p>
+    <p>- supprimer un agent par le bouton "Supprimer".</p>
+    <table class="table table-dark table-striped table-bordered table-hover">
+        <tr>
+            <thead class="thead-light">
+            <th>Détail</th>
+            <th>Spécialité</th>
+            </thead>
+        </tr>
+        {% for n_agent in agent %}
+            <article>
+                <tr>
+                    <td> {{ n_agent.name }} </td>
+                    <td> {{ n_agent.speciality.name }} </td>
+                    <td><a href="{{ path('agent_show',{'id': n_agent.id}) }}" class="btn btn-success">Détail</a></td>
+                    <td><a href="{{ path('agent_edit',{'id': n_agent.id}) }}" class="btn btn-warning">Modifier</a></td>
+                    <td><a href="{{ path('agent_del',{'id': n_agent.id}) }}" class="btn btn-danger" onclick="return confirm('Confirmez la suppression ?')">Supprimer</a></td>
+                </tr>
+            </article>
+        {% endfor %}
+    </table>
+</section>
+{{ knp_pagination_render(agent) }}
+{% endblock %}

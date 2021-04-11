@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme formStash 'bootstrap_4_layout.html.twig' %}
+
+{% block body %}
+
+    <h1>Création d'une planque </h1>
+
+    {{ form_start(formStash) }}
+    {{ form_row(formStash.code)}}
+    {{ form_end(formStash) }}
+    
+    <button type="submit" class="btn btn-success">
+        {% if editMode %}
+            Enregistrer les modifications
+        {% else %}
+            Ajouter le status
+        {% endif %}
+        </button>
+
+
+
+{% endblock %}

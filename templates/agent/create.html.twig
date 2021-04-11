@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme formAgent 'bootstrap_4_layout.html.twig' %}
+
+{% block body %}
+
+    <h1>Création d'un agent </h1>
+
+    {{ form_start(formAgent) }}
+
+    {{ form_row(formAgent.name)}}
+    {{ form_row(formAgent.firstname) }}
+    {{ form_row(formAgent.birthday) }}
+    {{ form_row(formAgent.nationality) }}
+    {{ form_row(formAgent.speciality.name) }}
+    {{ form_row(formAgent.missions.title) }}
+
+    <button type="submit" class="btn btn-success">
+        {% if editMode %}
+            Enregistrer les modifications
+        {% else %}
+            Ajouter l'agent
+        {% endif %}
+        </button>
+
+    {{ form_end(formAgent) }}
+
+{% endblock %}

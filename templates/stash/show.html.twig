@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello {{controller_name}}{% endblock %}
+
+{% block body %}
+
+<table class="table table-dark table-striped table-bordered table-hover">
+    <tr>
+        <thead class="thead-light">
+        <th>Code</th>
+        <th>Adresse</th>
+        <th>Pays</th>
+        <th>Type</th>
+        </thead>
+    </tr>
+
+        <article>
+            <tr>
+                <td> {{ stash.code  }} </td>
+                <td> {{ stash.address  }} </td>
+                <td> {{ stash.country  }} </td>
+                <td> {{ stash.type  }} </td>
+          </tr>
+        </article>
+
+</table>
+
+<a href="{{ path('stash') }}" class="btn btn-success">Retour</a>
+{% endblock %}

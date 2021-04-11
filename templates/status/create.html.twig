@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme formStatus 'bootstrap_4_layout.html.twig' %}
+
+{% block body %}
+
+    <h1>Création d'un status </h1>
+
+    {{ form_start(formStatus) }}
+
+    {{ form_row(formStatus.DetailStatus)}}
+
+    {{ form_end(formStatus) }}
+
+    <button type="submit" class="btn btn-success">
+        {% if editMode %}
+            Enregistrer les modifications
+        {% else %}
+            Ajouter le status
+        {% endif %}
+        </button>
+{% endblock %}

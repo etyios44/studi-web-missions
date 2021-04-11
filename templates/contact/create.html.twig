@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme formContact 'bootstrap_4_layout.html.twig' %}
+
+{% block body %}
+
+    <h1>Création d'un contact </h1>
+
+    {{ form_start(formContact) }}
+
+    {{ form_row(formContact.name)}}
+    {{ form_row(formContact.firstname) }}
+    {{ form_row(formContact.birthday) }}
+    {{ form_row(formContact.namecode) }}
+    {{ form_row(formContact.nationality) }}
+
+    {{ form_end(formContact) }}
+
+    <button type="submit" class="btn btn-success">
+        {% if editMode %}
+            Enregistrer les modifications
+        {% else %}
+            Ajouter le contact
+        {% endif %}
+        </button>
+
+{% endblock %}
