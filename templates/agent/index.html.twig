@@ -13,7 +13,10 @@
     <table class="table table-dark table-striped table-bordered table-hover">
         <tr>
             <thead class="thead-light">
-            <th>Détail</th>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Date naissance</th>
+            <th>Nationalité</th>
             <th>Spécialité</th>
             </thead>
         </tr>
@@ -21,10 +24,9 @@
             <article>
                 <tr>
                     <td> {{ n_agent.name }} </td>
-
-                    <td> {{ n_agent.name }} </td>
-
-                    <td> {{ n_agent.name }} </td>
+                    <td> {{ n_agent.firstname }} </td>
+                    <td> {{ n_agent.birthday | date('d/m/Y H:i') }} </td>
+                    <td> {{ n_agent.nationality }} </td>
                     <td> {{ n_agent.speciality.name }} </td>
                     <td><a href="{{ path('agent_show',{'id': n_agent.id}) }}" class="btn btn-success">Détail</a></td>
                     <td><a href="{{ path('agent_edit',{'id': n_agent.id}) }}" class="btn btn-warning">Modifier</a></td>

@@ -21,7 +21,6 @@ class AgentType extends AbstractType
             ->add('birthday')
             ->add('nationality')
             ->add('speciality')
-            ->add('missions')
         ;
     }
 

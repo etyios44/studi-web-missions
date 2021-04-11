@@ -40,12 +40,6 @@ class Agent
     private $nationality;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Missions::class, cascade="persist")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $missions;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Speciality::class, cascade="persist")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -100,18 +94,6 @@ class Agent
     public function setNationality(string $nationality): self
     {
         $this->nationality = $nationality;
-
-        return $this;
-    }
-
-    public function getMissions(): ?Missions
-    {
-        return $this->missions;
-    }
-
-    public function setMissions(?Missions $missions): self
-    {
-        $this->missions = $missions;
 
         return $this;
     }
