@@ -45,6 +45,11 @@ class Agent
      */
     private $speciality;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $codeIdentification;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -106,6 +111,18 @@ class Agent
     public function setSpeciality(?Speciality $speciality): self
     {
         $this->speciality = $speciality;
+
+        return $this;
+    }
+
+    public function getCodeIdentification(): ?string
+    {
+        return $this->codeIdentification;
+    }
+
+    public function setCodeIdentification(string $codeIdentification): self
+    {
+        $this->codeIdentification = $codeIdentification;
 
         return $this;
     }
