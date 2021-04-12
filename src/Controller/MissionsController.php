@@ -19,8 +19,12 @@ class MissionsController extends AbstractController
     #[Route('/missions', name: 'missions')]
     public function index(MissionsRepository $repo, PaginatorInterface $paginator, Request $request): Response
     {
-        //$repo = $this->getDoctrine()->getRepository(Article::class);
-        $missions = $repo->findAll();
+        $q = $request->query->get('q');
+        $s = $request->query->get('direction');
+
+        //$missions = $repo->findAll();
+        $missions = $repo->findAllWithSearch($q, $s);
+        
         //dd($missions);
 
         $missions = $paginator->paginate(

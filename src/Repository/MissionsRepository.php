@@ -19,6 +19,31 @@ class MissionsRepository extends ServiceEntityRepository
         parent::__construct($registry, Missions::class);
     }
 
+    /**
+     * Undocumented function
+     *
+     * @param string|string $term
+     * @return Missions[]
+     */
+    public function findAllWithSearch(?string $term, ?string $ordre)
+    {
+        $qb = $this->createQueryBuilder('c');
+
+        if ($term) {
+            //$qb->andWhere('c.TitleMission LIKE :term OR c.NameCode LIKE :term')
+            $qb->andWhere('c.TitleMission LIKE :term')
+              ->setParameter('term','%'.$term.'%')
+            ;
+        }
+
+        return $qb
+            //->orderBy('c.TitleMission','ASC')
+            ->orderBy('c.TitleMission', $ordre)
+            ->getQuery()
+            ->getResult();
+
+    }
+
     // /**
     //  * @return Missions[] Returns an array of Missions objects
     //  */
