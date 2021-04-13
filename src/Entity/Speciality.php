@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\SpecialityRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -27,6 +29,17 @@ class Speciality
      */
     private $detail;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Agent::class, inversedBy="specialities")
+     */
+    private $agent;
+
+    public function __construct()
+    {
+        $this->agent = new ArrayCollection();
+    }
+
+  
     public function getId(): ?int
     {
         return $this->id;
@@ -55,4 +68,30 @@ class Speciality
 
         return $this;
     }
+
+    /**
+     * @return Collection|Agent[]
+     */
+    public function getAgent(): Collection
+    {
+        return $this->agent;
+    }
+
+    public function addAgent(Agent $agent): self
+    {
+        if (!$this->agent->contains($agent)) {
+            $this->agent[] = $agent;
+        }
+
+        return $this;
+    }
+
+    public function removeAgent(Agent $agent): self
+    {
+        $this->agent->removeElement($agent);
+
+        return $this;
+    }
+
+  
 }

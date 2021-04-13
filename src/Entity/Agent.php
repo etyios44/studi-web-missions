@@ -50,6 +50,18 @@ class Agent
      */
     private $codeIdentification;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Speciality::class, mappedBy="agent")
+     */
+    private $specialities;
+
+    public function __construct()
+    {
+        $this->specialities = new ArrayCollection();
+    }
+
+   
+
     public function getId(): ?int
     {
         return $this->id;
@@ -127,4 +139,32 @@ class Agent
         return $this;
     }
 
+    /**
+     * @return Collection|Speciality[]
+     */
+    public function getSpecialities(): Collection
+    {
+        return $this->specialities;
+    }
+
+    public function addSpeciality(Speciality $speciality): self
+    {
+        if (!$this->specialities->contains($speciality)) {
+            $this->specialities[] = $speciality;
+            $speciality->addAgent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSpeciality(Speciality $speciality): self
+    {
+        if ($this->specialities->removeElement($speciality)) {
+            $speciality->removeAgent($this);
+        }
+
+        return $this;
+    }
+
+ 
 }

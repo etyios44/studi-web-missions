@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Speciality;
 use App\Form\SpecialityType;
 use App\Repository\SpecialityRepository;
+use App\Repository\AgentRepository;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -41,11 +42,15 @@ class SpecialityController extends AbstractController
         if(!$speciality) {
             $speciality = new Speciality();
             $speciality->setName('Speciality ...');
+            //dump($speciality);
+            //die;
         }    
+        
         $form = $this->createForm(SpecialityType::class, $speciality);
-
+        //dump($form);
+        //die;
         $form->handleRequest($request);
-
+        //die;
         if($form->isSubmitted() && $form->isValid()) {
 
             $manager->persist($speciality);
@@ -53,7 +58,7 @@ class SpecialityController extends AbstractController
 
             return $this->redirectToRoute('speciality', ['id' => $speciality->getId()]);
         }
-
+        //die;
         return $this->render('speciality/create.html.twig',
             [
                 'formSpeciality' => $form->createView(),

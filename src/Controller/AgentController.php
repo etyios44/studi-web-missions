@@ -4,8 +4,10 @@ namespace App\Controller;
 
 use Knp\Component\Pager\PaginatorInterface;
 use App\Entity\Agent;
+use App\Entity\Speciality;
 use App\Form\AgentType;
 use App\Repository\AgentRepository;
+use App\Repository\SpecialityRepository;
 use Doctrine\Persistence\ObjectManager;
 use ftp;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,7 +23,7 @@ class AgentController extends AbstractController
     {
         $agent = $repo->findAll();
         //dd($agent);
-
+        
         $agent = $paginator->paginate(
             $agent, // target to paginate
             $request->query->getInt('page', 1), // page parameter, now section
@@ -70,13 +72,44 @@ class AgentController extends AbstractController
         return $this->redirectToRoute('agent');
     }
 
-
+    
     #[Route('/agent/{id}/show', name: 'agent_show')]
+    /*
     public function show(int $id): Response
     {
         $agent = $this->getDoctrine()
             ->getRepository(Agent::class)
             ->find($id);
+
+        return $this->render('agent/show.html.twig', [
+            'controller_name' => 'AgentController',
+            'agent' => $agent
+        ]);
+    }
+    */
+
+    public function show(int $id): Response
+    {
+        $agent = $this->getDoctrine()
+            ->getRepository(Agent::class)
+            ->find($id);
+            dump($agent);
+            $a = $agent->getId();
+            //die;
+
+        /*
+        $special = $this->getDoctrine()
+            ->getRepository(Speciality::class)
+            ->findBy(array('id' => $agent));
+        
+        
+        for ($i=0; $i<count($agent->getSpecialities()); $i++) 
+        {
+            $special = $agent->getSpecialities()[$i]->getName();
+            dump($special);
+        }
+        die;   
+         */       
 
         return $this->render('agent/show.html.twig', [
             'controller_name' => 'AgentController',

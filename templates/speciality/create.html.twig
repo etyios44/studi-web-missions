@@ -9,6 +9,8 @@
     {{ form_start(formSpeciality) }}
 
     {{ form_row(formSpeciality.name)}}
+    {{ form_row(formSpeciality.detail)}}
+    {{ form_row(formSpeciality.agent)}}
 
     <button type="submit" class="btn btn-success">
         {% if editMode %}

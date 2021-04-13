@@ -11,6 +11,7 @@
         <th>Prénom</th>
         <th>Date naissance</th>
         <th>Nationalité</th>
+        <th>Code Indentification</th>
         <th>Spécialité</th>
         </thead>
     </tr>
@@ -21,8 +22,13 @@
                 <td> {{ agent.firstname }} </td>
                 <td> {{ agent.birthday | date('d/m/Y') }} </td>
                 <td> {{ agent.nationality }} </td>
-                <td> {{ agent.speciality.name }} </td>
-          </tr>
+                <td> {{ agent.codeIdentification }} </td>
+                <td> {% for ag in agent.specialities %}
+                        <p> {{ ag.name }} </p>
+                    {% endfor %}
+                </td>
+            </tr>
+
         </article>
 
 </table>

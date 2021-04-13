@@ -22,6 +22,7 @@ class AgentType extends AbstractType
             ->add('firstname')
             ->add('birthday')
             ->add('nationality')
+            //->add('speciality')
             ->add('speciality', EntityType::class, [
                 'class' => Speciality::class,
                 'choice_label' => 'name'
