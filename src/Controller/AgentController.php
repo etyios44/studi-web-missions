@@ -2,19 +2,21 @@
 
 namespace App\Controller;
 
-use Knp\Component\Pager\PaginatorInterface;
 use App\Entity\Agent;
 use App\Entity\Speciality;
+use App\Entity\Country;
 use App\Form\AgentType;
 use App\Repository\AgentRepository;
 use App\Repository\SpecialityRepository;
+use App\Repository\CountryRepository;
 use Doctrine\Persistence\ObjectManager;
-use ftp;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
+//use ftp;
 
 class AgentController extends AbstractController
 {
@@ -43,9 +45,17 @@ class AgentController extends AbstractController
         if(!$agent) {
             $agent = new Agent();
             $agent->setName('Agent ...');
-        }    
+        }
+        /*
+        dump($agent);
+        dump($agent->getSpeciality());
+        dump($agent->getSpeciality()->getName());
+        dump($agent->getCountry());
+        dump($agent->getCountry()->getId());
+        die;
+        */
+        
         $form = $this->createForm(AgentType::class, $agent);
-
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
@@ -74,42 +84,11 @@ class AgentController extends AbstractController
 
     
     #[Route('/agent/{id}/show', name: 'agent_show')]
-    /*
     public function show(int $id): Response
     {
         $agent = $this->getDoctrine()
             ->getRepository(Agent::class)
             ->find($id);
-
-        return $this->render('agent/show.html.twig', [
-            'controller_name' => 'AgentController',
-            'agent' => $agent
-        ]);
-    }
-    */
-
-    public function show(int $id): Response
-    {
-        $agent = $this->getDoctrine()
-            ->getRepository(Agent::class)
-            ->find($id);
-            dump($agent);
-            $a = $agent->getId();
-            //die;
-
-        /*
-        $special = $this->getDoctrine()
-            ->getRepository(Speciality::class)
-            ->findBy(array('id' => $agent));
-        
-        
-        for ($i=0; $i<count($agent->getSpecialities()); $i++) 
-        {
-            $special = $agent->getSpecialities()[$i]->getName();
-            dump($special);
-        }
-        die;   
-         */       
 
         return $this->render('agent/show.html.twig', [
             'controller_name' => 'AgentController',

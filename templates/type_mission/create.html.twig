@@ -10,7 +10,7 @@
 
     {{ form_row(formTypeMission.title)}}
 
-    {{ form_end(formTypeMission) }}
+
     
     <button type="submit" class="btn btn-success">
         {% if editMode %}
@@ -18,7 +18,8 @@
         {% else %}
             Ajouter le type de mission
         {% endif %}
-        </button>
+    </button>
 
+    {{ form_end(formTypeMission) }}
 
 {% endblock %}

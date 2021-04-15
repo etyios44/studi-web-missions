@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\Agent;
+use App\Entity\Agent; 
 use App\Entity\Speciality;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -20,8 +20,6 @@ class SpecialityType extends AbstractType
         $builder
             ->add('name')
             ->add('detail')
-            ->add('agent')
-        ;
         ;
     }
 

@@ -48,6 +48,9 @@ class MissionsController extends AbstractController
             $missions->setTitleMission('Mission ...')
             ->setDescriptionMission('etc');
         }    
+
+        dump($missions);
+        //die;
         $form = $this->createForm(MissionsType::class, $missions);
 
         $form->handleRequest($request);

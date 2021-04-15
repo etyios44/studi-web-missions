@@ -8,7 +8,7 @@
 
     {{ form_start(formStash) }}
     {{ form_row(formStash.code)}}
-    {{ form_end(formStash) }}
+
     
     <button type="submit" class="btn btn-success">
         {% if editMode %}
@@ -18,6 +18,6 @@
         {% endif %}
         </button>
 
-
+    {{ form_end(formStash) }}
 
 {% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme formCountry 'bootstrap_4_layout.html.twig' %}
+
+{% block body %}
+
+    <h1>Création d'un pays </h1>
+
+    {{ form_start(formCountry) }}
+
+    {{ form_row(formCountry.name)}}
+    {{ form_row(formCountry.nationality) }}
+
+
+    <button type="submit" class="btn btn-success">
+        {% if editMode %}
+            Enregistrer les modifications
+        {% else %}
+            Ajouter le pays 
+        {% endif %}
+        </button>
+
+{{ form_end(formCountry) }}
+
+{% endblock %}

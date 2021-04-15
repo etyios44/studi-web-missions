@@ -35,11 +35,6 @@ class Agent
     private $birthday;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $nationality;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Speciality::class, cascade="persist")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -51,9 +46,15 @@ class Agent
     private $codeIdentification;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Speciality::class, mappedBy="agent")
+     * @ORM\ManyToMany(targetEntity=Speciality::class, mappedBy="agent", cascade="persist")
      */
     private $specialities;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Country::class, inversedBy="agents", cascade="persist")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $country;
 
     public function __construct()
     {
@@ -99,18 +100,6 @@ class Agent
     public function setBirthday(\DateTimeInterface $birthday): self
     {
         $this->birthday = $birthday;
-
-        return $this;
-    }
-
-    public function getNationality(): ?string
-    {
-        return $this->nationality;
-    }
-
-    public function setNationality(string $nationality): self
-    {
-        $this->nationality = $nationality;
 
         return $this;
     }
@@ -162,6 +151,18 @@ class Agent
         if ($this->specialities->removeElement($speciality)) {
             $speciality->removeAgent($this);
         }
+
+        return $this;
+    }
+
+    public function getCountry(): ?Country
+    {
+        return $this->country;
+    }
+
+    public function setCountry(?Country $country): self
+    {
+        $this->country = $country;
 
         return $this;
     }

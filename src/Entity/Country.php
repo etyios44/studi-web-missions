@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\SpecialityRepository;
+use App\Repository\CountryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=SpecialityRepository::class)
+ * @ORM\Entity(repositoryClass=CountryRepository::class)
  */
-class Speciality
+class Country
 {
     /**
      * @ORM\Id
@@ -27,19 +27,18 @@ class Speciality
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $detail;
+    private $nationality;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Agent::class, inversedBy="specialities", cascade="persist")
+     * @ORM\OneToMany(targetEntity=Agent::class, mappedBy="country", cascade="persist")
      */
-    private $agent;
+    private $agents;
 
     public function __construct()
     {
-        $this->agent = new ArrayCollection();
+        $this->agents = new ArrayCollection();
     }
 
-  
     public function getId(): ?int
     {
         return $this->id;
@@ -57,14 +56,14 @@ class Speciality
         return $this;
     }
 
-    public function getDetail(): ?string
+    public function getNationality(): ?string
     {
-        return $this->detail;
+        return $this->nationality;
     }
 
-    public function setDetail(string $detail): self
+    public function setNationality(string $nationality): self
     {
-        $this->detail = $detail;
+        $this->nationality = $nationality;
 
         return $this;
     }
@@ -72,15 +71,16 @@ class Speciality
     /**
      * @return Collection|Agent[]
      */
-    public function getAgent(): Collection
+    public function getAgents(): Collection
     {
-        return $this->agent;
+        return $this->agents;
     }
 
     public function addAgent(Agent $agent): self
     {
-        if (!$this->agent->contains($agent)) {
-            $this->agent[] = $agent;
+        if (!$this->agents->contains($agent)) {
+            $this->agents[] = $agent;
+            $agent->setCountry($this);
         }
 
         return $this;
@@ -88,10 +88,13 @@ class Speciality
 
     public function removeAgent(Agent $agent): self
     {
-        $this->agent->removeElement($agent);
+        if ($this->agents->removeElement($agent)) {
+            // set the owning side to null (unless already changed)
+            if ($agent->getCountry() === $this) {
+                $agent->setCountry(null);
+            }
+        }
 
         return $this;
     }
-
-  
 }

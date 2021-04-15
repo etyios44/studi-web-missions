@@ -14,7 +14,7 @@
     {{ form_row(formContact.namecode) }}
     {{ form_row(formContact.nationality) }}
 
-    {{ form_end(formContact) }}
+
 
     <button type="submit" class="btn btn-success">
         {% if editMode %}
@@ -23,5 +23,7 @@
             Ajouter le contact
         {% endif %}
         </button>
+
+    {{ form_end(formContact) }}
 
 {% endblock %}

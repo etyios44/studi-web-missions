@@ -51,6 +51,11 @@ class User implements UserInterface
      */
     private $nationality;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $date_creation;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -164,6 +169,18 @@ class User implements UserInterface
     public function setNationality(string $nationality): self
     {
         $this->nationality = $nationality;
+
+        return $this;
+    }
+
+    public function getDateCreation(): ?\DateTimeInterface
+    {
+        return $this->date_creation;
+    }
+
+    public function setDateCreation(\DateTimeInterface $date_creation): self
+    {
+        $this->date_creation = $date_creation;
 
         return $this;
     }
