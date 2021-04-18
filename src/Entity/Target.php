@@ -38,9 +38,11 @@ class Target
     private $namecode;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity=Country::class, inversedBy="targets", cascade="persist")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $nationality;
+    private $country;
+
 
     public function getId(): ?int
     {
@@ -95,15 +97,16 @@ class Target
         return $this;
     }
 
-    public function getNationality(): ?string
+    public function getCountry(): ?Country
     {
-        return $this->nationality;
+        return $this->country;
     }
 
-    public function setNationality(string $nationality): self
+    public function setCountry(?Country $country): self
     {
-        $this->nationality = $nationality;
+        $this->country = $country;
 
         return $this;
     }
+
 }

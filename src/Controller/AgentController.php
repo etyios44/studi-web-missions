@@ -5,16 +5,24 @@ namespace App\Controller;
 use App\Entity\Agent;
 use App\Entity\Speciality;
 use App\Entity\Country;
+
 use App\Form\AgentType;
+use App\Form\SpecialityType;
+use App\Form\CountryType;
+
 use App\Repository\AgentRepository;
 use App\Repository\SpecialityRepository;
 use App\Repository\CountryRepository;
 use Doctrine\Persistence\ObjectManager;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+
 use Symfony\Component\Routing\Annotation\Route;
+
 use Knp\Component\Pager\PaginatorInterface;
 //use ftp;
 
@@ -24,7 +32,7 @@ class AgentController extends AbstractController
     public function index(AgentRepository $repo, PaginatorInterface $paginator, Request $request): Response
     {
         $agent = $repo->findAll();
-        //dd($agent);
+        //dd($agent[0]->getName());
         
         $agent = $paginator->paginate(
             $agent, // target to paginate
@@ -46,14 +54,17 @@ class AgentController extends AbstractController
             $agent = new Agent();
             $agent->setName('Agent ...');
         }
-        /*
+
         dump($agent);
-        dump($agent->getSpeciality());
-        dump($agent->getSpeciality()->getName());
+        $collection = [];
+        for ($i = 0; $i<count($agent->getSpeciality()); $i++) {
+            dump($agent->getSpeciality()[$i]);
+            $collection[$i] = $agent->getSpeciality()[$i]->getName();
+        }
         dump($agent->getCountry());
         dump($agent->getCountry()->getId());
+        dump($collection);
         die;
-        */
         
         $form = $this->createForm(AgentType::class, $agent);
         $form->handleRequest($request);

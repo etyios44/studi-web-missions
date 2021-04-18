@@ -30,12 +30,13 @@ class Stash
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $country;
+    private $type;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity=Country::class, inversedBy="stashes")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $type;
+    private $country;
 
     public function getId(): ?int
     {
@@ -66,17 +67,6 @@ class Stash
         return $this;
     }
 
-    public function getCountry(): ?string
-    {
-        return $this->country;
-    }
-
-    public function setCountry(string $country): self
-    {
-        $this->country = $country;
-
-        return $this;
-    }
 
     public function getType(): ?string
     {
@@ -86,6 +76,18 @@ class Stash
     public function setType(string $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getCountry(): ?Country
+    {
+        return $this->country;
+    }
+
+    public function setCountry(?Country $country): self
+    {
+        $this->country = $country;
 
         return $this;
     }

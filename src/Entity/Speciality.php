@@ -29,16 +29,6 @@ class Speciality
      */
     private $detail;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Agent::class, inversedBy="specialities", cascade="persist")
-     */
-    private $agent;
-
-    public function __construct()
-    {
-        $this->agent = new ArrayCollection();
-    }
-
   
     public function getId(): ?int
     {
@@ -65,30 +55,6 @@ class Speciality
     public function setDetail(string $detail): self
     {
         $this->detail = $detail;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Agent[]
-     */
-    public function getAgent(): Collection
-    {
-        return $this->agent;
-    }
-
-    public function addAgent(Agent $agent): self
-    {
-        if (!$this->agent->contains($agent)) {
-            $this->agent[] = $agent;
-        }
-
-        return $this;
-    }
-
-    public function removeAgent(Agent $agent): self
-    {
-        $this->agent->removeElement($agent);
 
         return $this;
     }

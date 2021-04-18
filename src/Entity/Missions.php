@@ -35,11 +35,6 @@ class Missions
     private $NameCode;
 
     /**
-     * @ORM\Column(type="string", length=50)
-     */
-    private $CountryMission;
-
-    /**
      * @ORM\Column(type="datetime")
      */
     private $DateStartMission;
@@ -54,13 +49,24 @@ class Missions
      */
     private $status;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Country::class, inversedBy="missions", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $country;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Agent::class, cascade={"persist"})
+     */
+    private $agent;
+
+
+
     public function __construct()
     {
         $this->status = new ArrayCollection();
+        $this->agent = new ArrayCollection();
     }
-
- 
-
     
     public function getId(): ?int
     {
@@ -103,17 +109,6 @@ class Missions
         return $this;
     }
 
-    public function getCountryMission(): ?string
-    {
-        return $this->CountryMission;
-    }
-
-    public function setCountryMission(string $CountryMission): self
-    {
-        $this->CountryMission = $CountryMission;
-
-        return $this;
-    }
 
     public function getDateStartMission(): ?\DateTimeInterface
     {
@@ -163,7 +158,41 @@ class Missions
         return $this;
     }
 
- 
+    public function getCountry(): ?Country
+    {
+        return $this->country;
+    }
+
+    public function setCountry(?Country $country): self
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Agent[]
+     */
+    public function getAgent(): Collection
+    {
+        return $this->agent;
+    }
+
+    public function addAgent(Agent $agent): self
+    {
+        if (!$this->agent->contains($agent)) {
+            $this->agent[] = $agent;
+        }
+
+        return $this;
+    }
+
+    public function removeAgent(Agent $agent): self
+    {
+        $this->agent->removeElement($agent);
+
+        return $this;
+    }
 
 
 

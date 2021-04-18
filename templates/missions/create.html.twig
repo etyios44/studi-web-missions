@@ -11,10 +11,11 @@
     {{ form_row(formMissions.TitleMission)}}
     {{ form_row(formMissions.DescriptionMission) }}
     {{ form_row(formMissions.NameCode) }}
-    {{ form_row(formMissions.CountryMission) }}
+    {{ form_row(formMissions.country) }}
+    {{ form_row(formMissions.agent.name) }}
     {{ form_row(formMissions.DateStartMission) }}
     {{ form_row(formMissions.DateEndMission) }}
-
+    {{ form_end(formMissions) }}
     <button type="submit" class="btn btn-success">
         {% if editMode %}
             Enregistrer les modifications
@@ -23,6 +24,6 @@
         {% endif %}
         </button>
 
-    {{ form_end(formMissions) }}
+
 
 {% endblock %}

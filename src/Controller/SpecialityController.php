@@ -44,7 +44,7 @@ class SpecialityController extends AbstractController
             $speciality->setName('Speciality ...');
         }    
 
-        //dump($speciality->getAgent()[0]->getSpecialities()[0]);
+        dump($speciality);
         //die; 
 
         $form = $this->createForm(SpecialityType::class, $speciality);

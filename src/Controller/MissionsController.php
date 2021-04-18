@@ -3,15 +3,22 @@
 namespace App\Controller;
 
 use Knp\Component\Pager\PaginatorInterface;
+
 use App\Entity\Missions;
+use App\Entity\Country;
+
 use App\Form\MissionsType;
+
 use App\Repository\MissionsRepository;
+
 use Doctrine\Persistence\ObjectManager;
-use ftp;
+//use ftp;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+
 use Symfony\Component\Routing\Annotation\Route;
 
 class MissionsController extends AbstractController
@@ -49,8 +56,10 @@ class MissionsController extends AbstractController
             ->setDescriptionMission('etc');
         }    
 
-        dump($missions);
+        dump($missions->getCountry());
+        dump($missions->getAgent());
         //die;
+        
         $form = $this->createForm(MissionsType::class, $missions);
 
         $form->handleRequest($request);

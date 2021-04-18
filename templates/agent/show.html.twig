@@ -23,7 +23,7 @@
                 <td> {{ agent.birthday | date('d/m/Y') }} </td>
                 <td> {{ agent.country.nationality }} </td>
                 <td> {{ agent.codeIdentification }} </td>
-                <td> {% for ag in agent.specialities %}
+                <td> {% for ag in agent.speciality %}
                         <p> {{ ag.name }} </p>
                     {% endfor %}
                 </td>

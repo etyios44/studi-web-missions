@@ -13,6 +13,7 @@
         <th>Pays</th>
         <th>Début</th>
         <th>Fin</th>
+        <th>Agents</th>
         </thead>
     </tr>
 
@@ -21,9 +22,13 @@
                 <td> {{ missions.TitleMission  }} </td>
                 <td> {{ missions.DescriptionMission  }} </td>
                 <td> {{ missions.NameCode  }} </td>
-                <td> {{ missions.CountryMission  }} </td>
+                <td> {{ missions.country.nationality  }} </td>
                 <td> {{ missions.DateStartMission | date('d/m/Y H:i') }} </td>
                 <td> {{ missions.DateEndMission | date('d/m/Y H:i') }} </td>
+                <td> {% for ag in missions.agent %}
+                    <p> {{ ag.name }} </p>
+                {% endfor %}
+            </td>
           </tr>
         </article>
 

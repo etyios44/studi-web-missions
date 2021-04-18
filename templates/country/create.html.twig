@@ -10,7 +10,7 @@
 
     {{ form_row(formCountry.name)}}
     {{ form_row(formCountry.nationality) }}
-
+    {{ form_end(formCountry) }}
 
     <button type="submit" class="btn btn-success">
         {% if editMode %}
@@ -20,6 +20,6 @@
         {% endif %}
         </button>
 
-{{ form_end(formCountry) }}
+
 
 {% endblock %}

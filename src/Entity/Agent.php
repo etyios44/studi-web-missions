@@ -35,20 +35,9 @@ class Agent
     private $birthday;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Speciality::class, cascade="persist")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $speciality;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $codeIdentification;
-
-    /**
-     * @ORM\ManyToMany(targetEntity=Speciality::class, mappedBy="agent", cascade="persist")
-     */
-    private $specialities;
 
     /**
      * @ORM\ManyToOne(targetEntity=Country::class, inversedBy="agents", cascade="persist")
@@ -56,12 +45,15 @@ class Agent
      */
     private $country;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Speciality::class, cascade="persist")
+     */
+    private $speciality;
+
     public function __construct()
     {
-        $this->specialities = new ArrayCollection();
+        $this->speciality = new ArrayCollection();
     }
-
-   
 
     public function getId(): ?int
     {
@@ -104,17 +96,6 @@ class Agent
         return $this;
     }
 
-    public function getSpeciality(): ?Speciality
-    {
-        return $this->speciality;
-    }
-
-    public function setSpeciality(?Speciality $speciality): self
-    {
-        $this->speciality = $speciality;
-
-        return $this;
-    }
 
     public function getCodeIdentification(): ?string
     {
@@ -128,33 +109,7 @@ class Agent
         return $this;
     }
 
-    /**
-     * @return Collection|Speciality[]
-     */
-    public function getSpecialities(): Collection
-    {
-        return $this->specialities;
-    }
-
-    public function addSpeciality(Speciality $speciality): self
-    {
-        if (!$this->specialities->contains($speciality)) {
-            $this->specialities[] = $speciality;
-            $speciality->addAgent($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSpeciality(Speciality $speciality): self
-    {
-        if ($this->specialities->removeElement($speciality)) {
-            $speciality->removeAgent($this);
-        }
-
-        return $this;
-    }
-
+  
     public function getCountry(): ?Country
     {
         return $this->country;
@@ -163,6 +118,30 @@ class Agent
     public function setCountry(?Country $country): self
     {
         $this->country = $country;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Speciality[]
+     */
+    public function getSpeciality(): Collection
+    {
+        return $this->speciality;
+    }
+
+    public function addSpeciality(Speciality $speciality): self
+    {
+        if (!$this->speciality->contains($speciality)) {
+            $this->speciality[] = $speciality;
+        }
+
+        return $this;
+    }
+
+    public function removeSpeciality(Speciality $speciality): self
+    {
+        $this->speciality->removeElement($speciality);
 
         return $this;
     }

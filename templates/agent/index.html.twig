@@ -23,7 +23,6 @@
             <article>
                 <tr>
                     <td> {{ n_agent.name }} </td>
-                    <!--td> {{ n_agent.speciality.name }} </td-->
                     <td><a href="{{ path('agent_show',{'id': n_agent.id}) }}" class="btn btn-success">Détail</a></td>
                     {% if app.user %}
                     <td><a href="{{ path('agent_edit',{'id': n_agent.id}) }}" class="btn btn-warning">Modifier</a></td>

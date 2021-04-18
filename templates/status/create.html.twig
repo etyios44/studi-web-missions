@@ -10,7 +10,7 @@
 
     {{ form_row(formStatus.DetailStatus)}}
 
-
+    {{ form_end(formStatus) }}
 
     <button type="submit" class="btn btn-success">
         {% if editMode %}
@@ -20,6 +20,6 @@
         {% endif %}
     </button>
 
-    {{ form_end(formStatus) }}
+
 
 {% endblock %}

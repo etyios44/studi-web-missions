@@ -11,6 +11,7 @@
     {{ form_row(formSpeciality.name)}}
     {{ form_row(formSpeciality.detail)}}    
 
+    {{ form_end(formSpeciality) }}
     <button type="submit" class="btn btn-success">
         {% if editMode %}
             Enregistrer les modifications
@@ -19,6 +20,5 @@
         {% endif %}
         </button>
 
-    {{ form_end(formSpeciality) }}
 
 {% endblock %}
